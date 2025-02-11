@@ -9,8 +9,8 @@ export const validatePassword = (password: string): boolean => {
   return passwordRegex.test(password);
 };
 
-export const authentication = (username: string, password: string): boolean => {
-    return credentials.users.some(
-        user => user.username === username && user.password === password
-    );
+export const authenticateUser = (username: string, password: string): boolean => {
+  return credentials.users.some(
+    user => user.username === username && user.password === password
+  );
 };

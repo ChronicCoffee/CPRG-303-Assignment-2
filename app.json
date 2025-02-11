@@ -1,29 +1,35 @@
 {
   "expo": {
-    "name": "CPRG-303-Assignment-2",
-    "slug": "CPRG-303-Assignment-2",
+    "name": "CPRG-303-ASSIGNMENT-2",
+    "slug": "cprg-303-assignment-2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "scheme": "myapp",
+    "newArchEnabled": true,
     "plugins": [
       "expo-router"
     ]

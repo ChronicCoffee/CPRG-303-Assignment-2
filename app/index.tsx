@@ -1,9 +1,26 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Welcome() {
+  const scaleValue = new Animated.Value(1);
+
+  const handlePressIn = () => {
+    Animated.spring(scaleValue, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleValue, {
+      toValue: 1,
+      friction: 3,
+      useNativeDriver: true,
+    }).start(() => router.push('/login/'));
+  };
+
   return (
     <LinearGradient
       colors={['#1B2845', '#537895']}
@@ -12,18 +29,22 @@ export default function Welcome() {
       end={{ x: 1, y: 1 }}
     >
       <Text style={styles.title}>Welcome to My New App</Text>
-      <TouchableOpacity  
-      onPress={() => router.push('/login/')}
-      >
-      <LinearGradient
-        colors={['#202020', 'black']}
-        style={styles.button}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        <Text style={styles.buttonText}>Go to Login</Text>
-      </LinearGradient>
-      </TouchableOpacity>
+      <Animated.View style={[styles.buttonContainer, { transform: [{ scale: scaleValue }] }]}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPressIn={handlePressIn}
+          onPressOut={handlePressOut}
+        >
+          <LinearGradient
+            colors={['#2C3E50', '#000000']}
+            style={styles.button}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+          >
+            <Text style={styles.buttonText}>Go to Login</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </Animated.View>
     </LinearGradient>
   );
 }
@@ -36,24 +57,31 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 28,
-    marginBottom: 20,
-    color: 'white',
+    fontSize: 32,
+    marginBottom: 30,
+    color: '#FFFFFF',
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10,
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.7)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 8,
+  },
+  buttonContainer: {
+    marginTop: 20,
   },
   button: {
-    backgroundColor: 'black',
-    padding: 15,
-    borderRadius: 5,
-    shadowColor: 'rgba(0, 0, 0, 0.75)',
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 5,
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.6,
+    shadowRadius: 8,
   },
   buttonText: {
-    color: 'white',
+    color: '#FFFFFF',
+    fontSize: 18,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

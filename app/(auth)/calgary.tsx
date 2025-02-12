@@ -9,7 +9,7 @@ export default function CalgaryPage() {
         name="Calgary" 
         imageSource={require('../../assets/calgary.jpg')}
         websiteUrl="https://www.calgary.ca/home.html" 
-        primaryColor="#D32F2F"  // Red theme for Calgary
+        primaryColor="#D32F2F"  
       />
       <Text style={styles.cityInfo}>
         Calgary is the largest city in Alberta, known for its proximity to the Rocky Mountains 
@@ -24,18 +24,18 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#121212',  // Dark mode background
+    backgroundColor: '#121212', 
   },
   header: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#FF5252',  // Bright red accent for header
+    color: '#FF5252',  
     marginBottom: 20,
   },
   cityInfo: {
     marginTop: 20,
     textAlign: 'center',
-    color: '#F5F5F5',  // Soft white text for readability
+    color: '#F5F5F5',  
     fontSize: 18,
     lineHeight: 26,
     paddingHorizontal: 10,

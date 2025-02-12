@@ -1,13 +1,11 @@
 import { Tabs } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useColorScheme } from 'react-native';
 
-export default function TabsLayout() {
-  const colorScheme = useColorScheme();
-
+export default function AuthLayout() {
   return (
     <Tabs
       screenOptions={{
+        headerShown: true,  // Re-enable header for tabs
         tabBarStyle: {
           backgroundColor: '#0D0D0D',
           borderTopWidth: 0,
@@ -25,9 +23,8 @@ export default function TabsLayout() {
       <Tabs.Screen 
         name="calgary" 
         options={{
-          title: 'Calgary',
-          tabBarLabelStyle: { fontSize: 12, fontWeight: 'bold' },
-          tabBarActiveTintColor: '#D32F2F',  // Calgary Red
+          title: 'Explore Calgary',  // Explicit title override
+          tabBarActiveTintColor: '#D32F2F',
           tabBarInactiveTintColor: '#9E9E9E',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons 
@@ -36,14 +33,20 @@ export default function TabsLayout() {
               size={size} 
             />
           ),
+          headerTitle: 'Explore Calgary',  // Override folder name in header
+          headerTitleStyle: {
+            color: '#D32F2F',
+            fontSize: 24,
+            fontWeight: 'bold',
+          },
+          headerTintColor: '#D32F2F',  // Back arrow color
         }} 
       />
       <Tabs.Screen 
         name="edmonton" 
         options={{
-          title: 'Edmonton',
-          tabBarLabelStyle: { fontSize: 12, fontWeight: 'bold' },
-          tabBarActiveTintColor: '#1976D2',  // Edmonton Blue
+          title: 'Discover Edmonton',
+          tabBarActiveTintColor: '#1976D2',
           tabBarInactiveTintColor: '#9E9E9E',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons 
@@ -52,6 +55,13 @@ export default function TabsLayout() {
               size={size} 
             />
           ),
+          headerTitle: 'Discover Edmonton',  // Override folder name in header
+          headerTitleStyle: {
+            color: '#1976D2',
+            fontSize: 24,
+            fontWeight: 'bold',
+          },
+          headerTintColor: '#1976D2',  // Back arrow color
         }} 
       />
     </Tabs>

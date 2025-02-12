@@ -9,7 +9,7 @@ export default function EdmontonPage() {
         name="Edmonton" 
         imageSource={require('../../assets/edmonton.jpg')}
         websiteUrl="https://www.edmonton.ca/" 
-        primaryColor="#1976D2"  // Blue theme for Edmonton
+        primaryColor="#1976D2" 
       />
       <Text style={styles.cityInfo}>
         Edmonton is the capital of Alberta and is known for its extensive park system 
@@ -24,18 +24,18 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#121212',  // Dark mode background
+    backgroundColor: '#121212', 
   },
   header: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#64B5F6',  // Light blue accent for header
+    color: '#64B5F6', 
     marginBottom: 20,
   },
   cityInfo: {
     marginTop: 20,
     textAlign: 'center',
-    color: '#F5F5F5',  // Soft white text for readability
+    color: '#F5F5F5',  
     fontSize: 18,
     lineHeight: 26,
     paddingHorizontal: 10,

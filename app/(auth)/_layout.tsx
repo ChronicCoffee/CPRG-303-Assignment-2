@@ -5,7 +5,7 @@ export default function AuthLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: true,  // Re-enable header for tabs
+        headerShown: true, 
         tabBarStyle: {
           backgroundColor: '#0D0D0D',
           borderTopWidth: 0,
@@ -23,7 +23,7 @@ export default function AuthLayout() {
       <Tabs.Screen 
         name="calgary" 
         options={{
-          title: 'Explore Calgary',  // Explicit title override
+          title: 'Explore Calgary',  
           tabBarActiveTintColor: '#D32F2F',
           tabBarInactiveTintColor: '#9E9E9E',
           tabBarIcon: ({ color, size }) => (
@@ -33,13 +33,13 @@ export default function AuthLayout() {
               size={size} 
             />
           ),
-          headerTitle: 'Explore Calgary',  // Override folder name in header
+          headerTitle: 'Explore Calgary',  
           headerTitleStyle: {
             color: '#D32F2F',
             fontSize: 24,
             fontWeight: 'bold',
           },
-          headerTintColor: '#D32F2F',  // Back arrow color
+          headerTintColor: '#D32F2F',  
         }} 
       />
       <Tabs.Screen 
@@ -55,13 +55,13 @@ export default function AuthLayout() {
               size={size} 
             />
           ),
-          headerTitle: 'Discover Edmonton',  // Override folder name in header
+          headerTitle: 'Discover Edmonton',  
           headerTitleStyle: {
             color: '#1976D2',
             fontSize: 24,
             fontWeight: 'bold',
           },
-          headerTintColor: '#1976D2',  // Back arrow color
+          headerTintColor: '#1976D2',  
         }} 
       />
     </Tabs>

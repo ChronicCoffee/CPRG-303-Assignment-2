@@ -19,7 +19,7 @@ export default function Login() {
     }
 
     if (authenticateUser(username, password)) {
-      router.replace('/(auth)/calgary'); // or '/(auth)/edmonton'
+      router.replace('/(auth)/calgary'); 
     } else {
       Alert.alert('Login Failed', 'Invalid username or password');
     }

@@ -5,7 +5,7 @@ interface CityLinkProps {
   name: string;
   imageSource: any;
   websiteUrl: string;
-  primaryColor: string;  // Dynamic color for city theming
+  primaryColor: string;  
 }
 
 export const CityLink: React.FC<CityLinkProps> = ({ name, imageSource, websiteUrl, primaryColor }) => {

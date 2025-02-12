@@ -1,3 +1,4 @@
+// app/(auth)/edmonton.tsx
 import { View, Text, StyleSheet } from 'react-native';
 import { CityLink } from '../../components/cityLink';
 

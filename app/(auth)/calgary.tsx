@@ -1,3 +1,4 @@
+// app/(auth)/calgary.tsx
 import { View, Text, StyleSheet } from 'react-native';
 import { CityLink } from '../../components/cityLink';
 
@@ -18,14 +19,14 @@ export default function Page() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      padding: 20,
-    },
-    cityInfo: {
-      marginTop: 15,
-      textAlign: 'center',
-      color: '#666',
-    },
-  });
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 20,
+  },
+  cityInfo: {
+    marginTop: 15,
+    textAlign: 'center',
+    color: '#666',
+  },
+});

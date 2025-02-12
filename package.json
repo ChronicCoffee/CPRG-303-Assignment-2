@@ -23,6 +23,10 @@
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
     "expo-router": "~4.0.17",
+<<<<<<< HEAD
+=======
+    "@expo/vector-icons": "^14.0.2",
+>>>>>>> 51683f591742c0ccd15cfbf1cdadf96619b977de
     "expo-linear-gradient": "~14.0.2"
   },
   "devDependencies": {

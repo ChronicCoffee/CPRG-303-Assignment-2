@@ -29,7 +29,7 @@ export default function Login() {
     if (error) {
       Alert.alert('Login Failed', error.message);
     } else {
-      router.replace('/(auth)/calgary');
+      router.replace('/landing');
     }
   };
 

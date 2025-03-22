@@ -1,4 +1,4 @@
-// app/login/index.tsx
+
 import React, { useState } from 'react';
 import {
   View,
@@ -15,22 +15,55 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { supabase } from '../../lib/supabase';
 
-export default function Login() {
+export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const scaleValue = new Animated.Value(1);
 
-  const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({
+  const handleSignUp = async () => {
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
-
+  
     if (error) {
-      Alert.alert('Login Failed', error.message);
-    } else {
-      router.replace('/(auth)/calgary');
+      Alert.alert('Sign Up Failed', error.message);
+      return;
     }
+  
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+  
+    const userId = session?.user?.id;
+  
+    if (!userId) {
+      Alert.alert(
+        'User ID Missing',
+        'We could not retrieve your user ID. Please try signing in manually.'
+      );
+      return;
+    }
+  
+    const { error: insertError } = await supabase.from('user_details').insert([
+      {
+        uuid: userId,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+      },
+    ]);
+  
+    if (insertError) {
+      Alert.alert('Error inserting user data', insertError.message);
+      return;
+    }
+  
+    Alert.alert('Sign Up Successful', 'You can now log in.');
+    router.replace('/login');
   };
 
   const handlePressIn = () => {
@@ -45,7 +78,7 @@ export default function Login() {
       toValue: 1,
       friction: 3,
       useNativeDriver: true,
-    }).start(handleLogin);
+    }).start(handleSignUp);
   };
 
   return (
@@ -59,7 +92,23 @@ export default function Login() {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.title}>Sign Up</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="First Name"
+          placeholderTextColor="#9E9E9E"
+          value={firstName}
+          onChangeText={setFirstName}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Last Name"
+          placeholderTextColor="#9E9E9E"
+          value={lastName}
+          onChangeText={setLastName}
+        />
 
         <TextInput
           style={styles.input}
@@ -92,13 +141,13 @@ export default function Login() {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
             >
-              <Text style={styles.buttonText}>Login</Text>
+              <Text style={styles.buttonText}>Sign Up</Text>
             </LinearGradient>
           </TouchableOpacity>
         </Animated.View>
 
-        <TouchableOpacity onPress={() => router.push('/signup')}>
-          <Text style={styles.signupText}>Don't have an account? Sign Up</Text>
+        <TouchableOpacity onPress={() => router.push('/login')}>
+          <Text style={styles.signupText}>Already have an account? Sign In</Text>
         </TouchableOpacity>
       </LinearGradient>
     </KeyboardAvoidingView>

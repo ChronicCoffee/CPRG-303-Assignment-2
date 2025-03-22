@@ -1,14 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-  Animated,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert, Animated, ActivityIndicator, ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { supabase } from '../../lib/supabase';
@@ -16,7 +8,9 @@ import { supabase } from '../../lib/supabase';
 export default function LandingPage() {
   const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(true);
-  const scaleValue = new Animated.Value(1);
+  const scaleLogout = new Animated.Value(1);
+  const scaleCalgary = new Animated.Value(1);
+  const scaleEdmonton = new Animated.Value(1);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -58,61 +52,119 @@ export default function LandingPage() {
     }
   };
 
-  const handlePressIn = () => {
-    Animated.spring(scaleValue, {
-      toValue: 0.95,
-      useNativeDriver: true,
-    }).start();
-  };
+  const createButtonHandlers = (scaleRef: Animated.Value, onPressAction: () => void) => ({
+    onPressIn: () => {
+      Animated.spring(scaleRef, {
+        toValue: 0.95,
+        useNativeDriver: true,
+      }).start();
+    },
+    onPressOut: () => {
+      Animated.spring(scaleRef, {
+        toValue: 1,
+        friction: 3,
+        useNativeDriver: true,
+      }).start(onPressAction);
+    },
+  });
 
-  const handlePressOut = () => {
-    Animated.spring(scaleValue, {
-      toValue: 1,
-      friction: 3,
-      useNativeDriver: true,
-    }).start(handleLogout);
-  };
+  const calgaryButton = createButtonHandlers(scaleCalgary, () => router.push('/(auth)/calgary'));
+  const edmontonButton = createButtonHandlers(scaleEdmonton, () => router.push('/(auth)/edmonton'));
+  const logoutButton = createButtonHandlers(scaleLogout, handleLogout);
+
+  if (loading) {
+    return (
+      <LinearGradient colors={['#1B2845', '#537895']} style={styles.container}>
+        <ActivityIndicator size="large" color="#121212" />
+      </LinearGradient>
+    );
+  }
 
   return (
-    <LinearGradient
-      colors={['#1B2845', '#537895']}
-      style={styles.container}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
-      {loading ? (
-        <ActivityIndicator size="large" color="#FFFFFF" />
-      ) : (
-        <>
-          <Text style={styles.title}>Welcome, {fullName} 👋</Text>
-          <Animated.View style={[styles.buttonContainer, { transform: [{ scale: scaleValue }] }]}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPressIn={handlePressIn}
-              onPressOut={handlePressOut}
+    <ScrollView contentContainerStyle={styles.container}>
+      <LinearGradient
+        colors={['#1B2845', '#537895']}
+        style={styles.innerContainer}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
+        <Text style={styles.title}>Welcome, {fullName} 👋</Text>
+
+        {/* Calgary Button */}
+        <Animated.View style={[styles.buttonContainer, { transform: [{ scale: scaleCalgary }] }]}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPressIn={calgaryButton.onPressIn}
+            onPressOut={calgaryButton.onPressOut}
+          >
+            <LinearGradient
+              colors={['#D32F2F', '#B71C1C']}
+              style={styles.button}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
             >
-              <LinearGradient
-                colors={['#2C3E50', '#000000']}
-                style={styles.button}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-              >
-                <Text style={styles.buttonText}>Logout</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-          </Animated.View>
-        </>
-      )}
-    </LinearGradient>
+              <Text style={styles.buttonText}>Explore Calgary</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </Animated.View>
+
+        {/* Edmonton Button */}
+        <Animated.View style={[styles.buttonContainer, { transform: [{ scale: scaleEdmonton }] }]}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPressIn={edmontonButton.onPressIn}
+            onPressOut={edmontonButton.onPressOut}
+          >
+            <LinearGradient
+              colors={['#1976D2', '#0D47A1']}
+              style={styles.button}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+            >
+              <Text style={styles.buttonText}>Discover Edmonton</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </Animated.View>
+
+        {/* Logout Button */}
+        <Animated.View style={[styles.buttonContainer, { transform: [{ scale: scaleLogout }] }]}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPressIn={logoutButton.onPressIn}
+            onPressOut={logoutButton.onPressOut}
+          >
+            <LinearGradient
+              colors={['#2C3E50', '#000000']}
+              style={styles.button}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+            >
+              <Text style={styles.buttonText}>Logout</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </Animated.View>
+      </LinearGradient>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  scroll: {
     flex: 1,
+    backgroundColor: '#121212',
+  },
+  container: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+  },
+  innerContainer: {
+    padding: 30,
+    borderRadius: 20,
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: '#121212',
   },
   title: {
     fontSize: 28,
@@ -122,12 +174,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonContainer: {
-    marginTop: 20,
+    marginVertical: 12,
+    width: '100%',
   },
   button: {
     paddingVertical: 15,
-    paddingHorizontal: 40,
     borderRadius: 12,
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.6,
@@ -137,6 +190,6 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
+

@@ -36,12 +36,12 @@ export default function Welcome() {
           onPressOut={handlePressOut}
         >
           <LinearGradient
-            colors={['#2C3E50', '#000000']}
-            style={styles.button}
+            colors={['#3A6073', '#16222A']} // Darker gradient colors
+            style={[styles.button, { borderWidth: 1, borderColor: '#FFFFFF' }]} // Add light border
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
           >
-            <Text style={styles.buttonText}>Go to Login</Text>
+            <Text style={[styles.buttonText, { color: '#FFFFFF' }]}>Go to Login</Text> {/* White text */}
           </LinearGradient>
         </TouchableOpacity>
       </Animated.View>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',

@@ -23,7 +23,7 @@ export default function Welcome() {
 
   return (
     <LinearGradient
-      colors={['#1B2845', '#537895']}
+      colors={['#16222A', '#3A6073']} // Match the Login page background gradient
       style={styles.container}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
@@ -36,7 +36,7 @@ export default function Welcome() {
           onPressOut={handlePressOut}
         >
           <LinearGradient
-            colors={['#3A6073', '#16222A']} // Darker gradient colors
+            colors={['#3A6073', '#16222A']} // Match the Login page button gradient
             style={[styles.button, { borderWidth: 1, borderColor: '#FFFFFF' }]} // Add light border
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}

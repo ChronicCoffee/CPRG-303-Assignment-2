@@ -54,7 +54,7 @@ export default function Login() {
       style={styles.container}
     >
       <LinearGradient
-        colors={['#1B2845', '#537895']}
+        colors={['#16222A', '#3A6073']} // Match the button's gradient colors
         style={styles.innerContainer}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -62,7 +62,7 @@ export default function Login() {
         <Text style={styles.title}>Sign In</Text>
 
         <TextInput
-          style={styles.input}
+          style={[styles.input, { backgroundColor: '#1E2A38', borderColor: '#3A6073' }]} // Darker input background and border
           placeholder="Email"
           placeholderTextColor="#9E9E9E"
           value={email}
@@ -72,7 +72,7 @@ export default function Login() {
         />
 
         <TextInput
-          style={styles.input}
+          style={[styles.input, { backgroundColor: '#1E2A38', borderColor: '#3A6073' }]} // Darker input background and border
           placeholder="Password"
           placeholderTextColor="#9E9E9E"
           secureTextEntry
@@ -87,7 +87,7 @@ export default function Login() {
             onPressOut={handlePressOut}
           >
             <LinearGradient
-              colors={['#3A6073', '#16222A']} // Updated gradient colors
+              colors={['#3A6073', '#16222A']} // Button gradient
               style={[styles.button, { borderWidth: 1, borderColor: '#FFFFFF' }]} // Add light border
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}

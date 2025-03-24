@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Alert, Animated, ActivityIndicator, ScrollView} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -83,7 +82,7 @@ export default function LandingPage() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <LinearGradient
-        colors={['#1B2845', '#537895']}
+        colors={['#16222A', '#3A6073']} // Match the Login and Welcome page background gradient
         style={styles.innerContainer}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -98,8 +97,8 @@ export default function LandingPage() {
             onPressOut={calgaryButton.onPressOut}
           >
             <LinearGradient
-              colors={['#D32F2F', '#B71C1C']}
-              style={styles.button}
+              colors={['#D32F2F', '#B71C1C']} // Keep Calgary button gradient
+              style={[styles.button, { borderWidth: 1, borderColor: '#FFFFFF' }]} // Add white border
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
             >
@@ -116,8 +115,8 @@ export default function LandingPage() {
             onPressOut={edmontonButton.onPressOut}
           >
             <LinearGradient
-              colors={['#1976D2', '#0D47A1']}
-              style={styles.button}
+              colors={['#1976D2', '#0D47A1']} // Keep Edmonton button gradient
+              style={[styles.button, { borderWidth: 1, borderColor: '#FFFFFF' }]} // Add white border
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
             >
@@ -134,8 +133,8 @@ export default function LandingPage() {
             onPressOut={logoutButton.onPressOut}
           >
             <LinearGradient
-              colors={['#2C3E50', '#000000']}
-              style={styles.button}
+              colors={['#3A6073', '#16222A']} // Match the Login and Welcome page button gradient
+              style={[styles.button, { borderWidth: 1, borderColor: '#FFFFFF' }]} // Add white border
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
             >

@@ -31,7 +31,8 @@
     "scheme": "myapp",
     "newArchEnabled": true,
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-dotenv"
     ]
   }
 }
